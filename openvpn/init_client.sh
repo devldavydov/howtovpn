@@ -49,7 +49,7 @@ KEY=`cat $RSA_DIR/pki/private/$USERNAME.key`
 cat >$CLIENT_DIR/$USERNAME.ovpn <<EOL
 client
 dev tun
-proto udp
+proto tcp
 remote $SERVER_ADDR 1194
 resolv-retry infinite
 nobind
