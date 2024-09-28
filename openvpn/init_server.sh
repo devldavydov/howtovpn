@@ -85,7 +85,7 @@ cp $RSA_DIR/pki/dh.pem \
 
 cat >$SERVER_DIR/$SERVER.conf <<EOL
 port 1194
-proto udp
+proto tcp
 dev tun
 ca ca.crt
 cert $SERVER.crt
