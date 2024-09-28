@@ -21,8 +21,31 @@ Client config in script can be updated from installation example:\
 `/usr/share/doc/openvpn/examples/sample-config-files/client.conf`
 10. Copy client config from `client_conf` dir to client device.
 
+### AutoSSH and VPN tunnel
+
+Sometimes it's necessary to pass VPN connection through tunnel:
+
+```
+Server 1.1.1.1                               Server 2.2.2.2
+--------------                               --------------
+TCP:1194 <--------------- SSH -------------> OpenVPN, TCP:1994
+```
+
+`Server 2.2.2.2` - start OpenVPN on TCP 1994, enable IP forwarding and NAT.\
+`Server 1.1.1.1`:
+1. Install autossh: `apt install autossh`.
+2. Create systemd service file: `/etc/systemd/system/autossh.service` from `autossh.service` file.\
+Place real address of remote server.
+3. Ensure that ssh from `Server 1.1.1.1` to `Server 2.2.2.2` authenticated by keys.\
+Use `ssh-keygen` and `ssh-copy-id`.
+5. Enable service:\
+`systemctl daemon-reload`\
+`systemctl start autossh.service`
+6. Now your OpenVPN client can connect to `Server 1.1.1.1` but this connection will be tunneled to `Server 2.2.2.2`.
+
 ### Additional info:
 1. [Ubuntu OpenVPN guide](https://ubuntu.com/server/docs/how-to-install-and-use-openvpn)
 2. [EasyRSA guide](https://community.openvpn.net/openvpn/wiki/EasyRSA3-OpenVPN-Howto)
 3. [OpenVPN guide](https://openvpn.net/community-resources/how-to/)
 4. [IP forwarding](https://linuxconfig.org/how-to-turn-on-off-ip-forwarding-in-linux)
+5. [AutoSSH](https://amorev.ru/autossh/)
