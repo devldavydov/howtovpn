@@ -1,0 +1,16 @@
+[Unit]
+Description=Autossh Service
+After=network.target
+
+[Service]
+Environment="AUTOSSH_PIDFILE=/var/run/autossh.pid"
+Environment="AUTOSSH_POLL=30"
+Environment="AUTOSSH_FIRST_POLL=30"
+ExecStart=/usr/bin/autossh -NL 0.0.0.0:1194:127.0.0.1:1194 <username@remote_server>
+ExecReload=/bin/kill -HUP $MAINPID
+KillMode=process
+Restart=always
+RestartSec=3
+
+[Install]
+WantedBy=multi-user.target
