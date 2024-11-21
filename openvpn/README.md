@@ -28,7 +28,7 @@ Sometimes it's necessary to pass VPN connection through tunnel:
 ```
 Server 1.1.1.1                               Server 2.2.2.2
 --------------                               --------------
-TCP:1194 <--------------- SSH -------------> OpenVPN, TCP:1994
+TCP:1194 <--------------- SSH -------------> OpenVPN, TCP:1194
 ```
 
 `Server 2.2.2.2` - start OpenVPN on TCP 1994, enable IP forwarding and NAT.\
