@@ -1,13 +1,12 @@
 #!/bin/bash
 
-if [ "$#" -ne 3 ]; then
-    echo "Usage: <script> server_addr openvpn_server_name username"
+if [ "$#" -ne 2 ]; then
+    echo "Usage: <script> server_addr username"
     exit 1
 fi
 
 SERVER_ADDR=$1
-SERVER_NAME=$2
-USERNAME=$3
+USERNAME=$2
 
 WORK_DIR=`pwd`
 RSA_DIR=$WORK_DIR/easy-rsa
