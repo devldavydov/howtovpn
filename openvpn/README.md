@@ -14,8 +14,9 @@ Set `net.ipv4.ip_forward = 1` in `/etc/sysctl.conf`.\
 Run `sysctl -p`.
 7. Ensure NAT enabled:\
 Run `iptables -t nat -A POSTROUTING -s 10.8.0.0/24 -o eth0 -j MASQUERADE`.\
-Supply actual interface. This setting not persists after reboot, use other tools.
-8. Next add clients with script `init_client.sh`.\
+Supply actual interface. This setting not persists after reboot, use other tools:
+`apt install iptables-persistent`
+9. Next add clients with script `init_client.sh`.\
 Supply script with server address, server name (from 2.) and user name.\
 Client config in script can be updated from installation example:\
 `/usr/share/doc/openvpn/examples/sample-config-files/client.conf`
