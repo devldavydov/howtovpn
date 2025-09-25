@@ -2,7 +2,7 @@
 
 1. Install openvpn and easy-rsa:\
 `apt install openvpn easy-rsa`.
-2. Use script `init_server.sh` to setup PKI and generate server configuration.\
+2. Use script `init_server.sh` to setup PKI and generate server configuration (run from this directory).\
 Supply openvpn server name as script argument.\
 Server config in script can be updated from installation example:\
 `/usr/share/doc/openvpn/examples/sample-config-files/server.conf`.
@@ -16,7 +16,7 @@ Run `sysctl -p`.
 Run `iptables -t nat -A POSTROUTING -s 10.8.0.0/24 -o eth0 -j MASQUERADE`.\
 Supply actual interface. This setting not persists after reboot, use other tools:
 `apt install iptables-persistent`
-9. Next add clients with script `init_client.sh`.\
+9. Next add clients with script `init_client.sh` (run from this directory).\
 Supply script with server address, server name (from 2.) and user name.\
 Client config in script can be updated from installation example:\
 `/usr/share/doc/openvpn/examples/sample-config-files/client.conf`
@@ -43,6 +43,18 @@ Use `ssh-keygen` and `ssh-copy-id`.
 `systemctl daemon-reload`\
 `systemctl start autossh.service`
 6. Now your OpenVPN client can connect to `Server 1.1.1.1` but this connection will be tunneled to `Server 2.2.2.2`.
+
+### Make local server address accessible through VPN
+
+Sometimes it's necessary to have your webserver running locally on server. And access to it should be only through VPN connection.
+
+1. Create dummy interface on server: `ip link add dummy0 type dummy`
+2. Set IP address for dummy: `ip addr add 192.168.100.100/24 dev dummy0`
+3. In OpenVPN server conf file add: `push "192.168.100.100 255.255.255.255"`
+4. Restart OpenVPN server
+5. Address 192.168.100.100 will be accessible from your client device with turned on VPN connection
+6. To delete dummy: `ip link delete dummy0`
+7. TODO: describe how to make dummy persistent
 
 ### Additional info:
 1. [Ubuntu OpenVPN guide](https://ubuntu.com/server/docs/how-to-install-and-use-openvpn)

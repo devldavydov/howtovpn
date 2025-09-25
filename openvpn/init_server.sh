@@ -1,7 +1,4 @@
 #!/bin/sh
-#
-# apt install openssh easy-rsa
-#
 
 if [ "$#" -ne 1 ]; then
     echo "Usage: <script> openvpn_server_name"
@@ -108,10 +105,5 @@ explicit-exit-notify 1
 EOL
 
 echo
-echo "1. Copy files from $SERVER_DIR to /etc/openvpn"
-echo "2. Run: systemctl start openvpn@$SERVER"
-echo "3. Enable IP forwarding:"
-echo "   - set 'net.ipv4.ip_forward = 1' in /etc/sysctl.conf"
-echo "   - run: sysctl -p"
-echo "4. Enable NAT (not persist after reboot):"
-echo "   - iptables -t nat -A POSTROUTING -s 10.8.0.0/24 -o eth0 -j MASQUERADE"
+echo "Done!"
+echo "Follow README.md for next steps"
