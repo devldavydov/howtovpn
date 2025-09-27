@@ -54,7 +54,24 @@ Sometimes it's necessary to have your webserver running locally on server. And a
 4. Restart OpenVPN server
 5. Address 192.168.100.100 will be accessible from your client device with turned on VPN connection
 6. To delete dummy: `ip link delete dummy0`
-7. TODO: describe how to make dummy persistent
+7. If you want automatic dummy iface up create files listed below and restart `systemd-networkd`:
+```
+# cd /etc/systemd/network
+
+# cat 10-dummy0.netdev
+[NetDev]
+Name=dummy0
+Kind=dummy
+
+# cat 20-dummy0.network
+[Match]
+Name=dummy0
+
+[Network]
+Address=192.168.100.100/24
+
+# systemctl restart systemd-networkd
+```
 
 ### Additional info:
 1. [Ubuntu OpenVPN guide](https://ubuntu.com/server/docs/how-to-install-and-use-openvpn)
