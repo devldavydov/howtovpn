@@ -73,6 +73,25 @@ Address=192.168.100.100/24
 # systemctl restart systemd-networkd
 ```
 
+### Server settings
+
+1. Install fail2ban: `apt install fail2ban`
+2. Set jail configuration in `/etc/fail2ban/jail.conf`, then restart `systemctl restart fail2ban.service`
+3. Create new user without password: `useradd -m -s /bin/bash <username>`
+4. Add to `/home/<username>/.ssh/authorized_keys` your SSH public key
+5. Set params in `/etc/ssh/sshd_config`:
+```
+PermitRootLogin no
+PasswordAuthentication no
+PubkeyAuthentication yes
+```
+6. Restart `systemctl restart ssh.service`
+7. Create file `/etc/sudoers.d/<username>`:
+```
+<username> ALL=(ALL) NOPASSWD: ALL
+```
+8. SSH by key to your server and user `ssh username@hostname`, and then use `sudo -i` to get `root`
+
 ### Additional info:
 1. [Ubuntu OpenVPN guide](https://ubuntu.com/server/docs/how-to-install-and-use-openvpn)
 2. [EasyRSA guide](https://community.openvpn.net/openvpn/wiki/EasyRSA3-OpenVPN-Howto)
