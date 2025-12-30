@@ -92,6 +92,7 @@ server 10.8.0.0 255.255.255.0
 ifconfig-pool-persist /var/log/openvpn/ipp.txt
 push "redirect-gateway def1 bypass-dhcp"
 keepalive 10 120
+inactive 3600
 tls-auth ta.key 0
 cipher AES-256-CBC
 compress lz4-v2
