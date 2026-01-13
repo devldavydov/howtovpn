@@ -24,7 +24,7 @@
 
 7. Will be created one inbound with one client
 
-8. Install app v2RayTun on your device
+8. Install app `v2RayTun` on your device
 
 9. Open client QR code and scan it via app
 
