@@ -15,12 +15,12 @@
 5. Open browser with URL: `https://127.0.0.1:<port>/<path from installer>`
 
 6. Go to Inbounds, add new:
-- **Protocol**: vless
-- **Listen IP**: your server public IP
-- **Port**: 443
-- **Security**: Reality
-- **Get New Cert**
-- **Client/Flow**: xtls-rprx-vision
+    - **Protocol**: vless
+    - **Listen IP**: your server public IP
+    - **Port**: 443
+    - **Security**: Reality
+    - **Get New Cert**
+    - **Client/Flow**: xtls-rprx-vision
 
 7. Will be created one inbound with one client
 
@@ -29,7 +29,9 @@
 9. Open client QR code and scan it via app
 
 10. To add new client:
-- Inbound menu - Add client
-- **Flow**: xtls-rprx-vision
-- Add client
-- Steps 8,9 with new device and new QR code
+    - Inbound menu - Add client
+    - **Flow**: xtls-rprx-vision
+    - Add client
+    - Steps 8,9 with new device and new QR code
+
+11. To delete x-ui from server use command: `x-ui uninstall`
